@@ -11,29 +11,43 @@ const pacienteSchema = z.object({
     data: z.object({
         nm_paciente: z.string(),
         cpf: z.string(),
-        ds_sexo: z.string(),
+        ds_sexo: z.string().nullable().optional(),
         dt_nascimento: z.string(),
-        email: z.string(),
+        email: z.string().nullable().optional(),
         numero_telefone: z.string(),
-        estado_civil: z.string(),
-        nm_cidade: z.string(),
-        cep: z.string(),
-        nm_estado: z.string(),
-        nm_pais: z.string(),
+        estado_civil: z.string().nullable().optional(),
+        nm_cidade: z.string().nullable().optional(),
+        cep: z.string().nullable().optional(),
+        nm_estado: z.string().nullable().optional(),
+        nm_pais: z.string().nullable().optional(),
         cd_multi_empresa: z.number().nullable().optional(),
+        rg: z.string().nullable().optional(),
+        profissao: z.string().nullable().optional(),
+        empresa: z.string().nullable().optional(),
+        telefone_fixo: z.string().nullable().optional(),
+        preferencia_contato: z.string(),
+        breve_diagnostico: z.string().nullable().optional(),
+        nm_bairro: z.string().nullable().optional(),
+        logradouro: z.string().nullable().optional(),
+        numero_casa: z.string().nullable().optional(),
+        complemento: z.string().nullable().optional(),
+        cd_convenio: z.number().nullable().optional(),
+        numero_convenio: z.string().nullable().optional(),
+        validade_carteira: z.string().nullable().optional(),
+        numero_cns: z.string().nullable().optional(),
     })
 })
 export class Paciente implements PacienteRepository{
 
     async getPacientes(request: FastifyRequest, reply: FastifyReply): Promise<PacienteBanco[]> {
-        const { cd_multi_empresa }: any = request.query
-        const response = await pacienteKnex.getPacientes(cd_multi_empresa)
+        const { cd_multi_empresa, qt_resultados, page }: any = request.query
+        const response = await pacienteKnex.getPacientes(cd_multi_empresa, qt_resultados, page)
         return reply.status(200).send(response)
     }
 
     async createPaciente(request: FastifyRequest, reply: FastifyReply): Promise<PacienteBanco> {
+        console.log(request.body)
         const { data } = pacienteSchema.parse(request.body)
-        console.log(data)
         await pacienteKnex.createPaciente(data)
 
         const responsePacientes = await pacienteKnex.getPacientes(data.cd_multi_empresa)
@@ -54,6 +68,12 @@ export class Paciente implements PacienteRepository{
 
     async getPacienteByName(request: FastifyRequest, reply: FastifyReply): Promise<PacienteBanco> {
         return
+    }
+
+    async countPacientes(request: FastifyRequest, reply: FastifyReply): Promise<number> {
+        const { cd_multi_empresa }: any = request.query
+        const response = await pacienteKnex.countPacientes(cd_multi_empresa)
+        return reply.status(200).send(response)
     }
 
     async updatePaciente(request: FastifyRequest, reply: FastifyReply): Promise<PacienteBanco> {

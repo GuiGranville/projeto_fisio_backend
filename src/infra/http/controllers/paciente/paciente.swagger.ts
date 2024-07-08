@@ -45,6 +45,53 @@ export const pacienteGetAllRouteSwaggerConfig = {
   }
 
 
+  export const pacienteCountRouteSwaggerConfig = {
+    description:
+      'Route to get all paciente, returns some data about the situation.',
+    tags: ['Paciente'],
+    response: {
+      200: {
+        description: 'Successful response!',
+        type: 'number',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Application status message',
+          },
+          uptime: {
+            type: 'number',
+            description: 'Time the application has been up',
+          },
+          responseTime: {
+            type: 'number',
+            description: 'Response delay time',
+          },
+          timestamp: { type: 'number', description: 'Request date' },
+        },
+      },
+      500: {
+        description: 'Application error!',
+        type: 'object',
+        properties: {
+          message: {
+            type: 'string',
+            description: 'Application error message',
+          },
+          uptime: {
+            type: 'number',
+            description: 'Time the application has been up',
+          },
+          responseTime: {
+            type: 'number',
+            description: 'Response delay time',
+          },
+          timestamp: { type: 'number', description: 'Request date' },
+        },
+      },
+    },
+  }
+
+
 
 export const pacienteCreateRouteSwaggerConfig = {
     description:
