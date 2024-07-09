@@ -6,6 +6,7 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import { healthCheckRoutes } from "./http/controllers/healthCheck/routes";
 import { pacienteRoutes } from "./http/controllers/paciente/routes";
 import { profissionalRoutes } from "./http/controllers/profissional/routes";
+import { agendamentoRoutes } from "./http/controllers/agendamento/routes";
 
 export const server: FastifyInstance = fastify();
 
@@ -40,3 +41,4 @@ server.register(fastifySwaggerUi,{
 server.register(healthCheckRoutes)
 server.register(pacienteRoutes)
 server.register(profissionalRoutes)
+server.register(agendamentoRoutes)

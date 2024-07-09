@@ -1,7 +1,7 @@
 
 
 export interface StatusReturn {
-    messageServer?: string
+    messageServer?: any
     messageClient: string
     status: number
 }
