@@ -26,8 +26,15 @@ class PacienteKnex implements PacienteKnexRepository{
         return Number(response[0].count)
     }
 
-    async getPaciente(): Promise<PacienteBanco> {
+    async getPacienteById(): Promise<PacienteBanco> {
         return
+    }
+
+    async getPacienteByName(nmPaciente: string, cdMultiEmpresa: number): Promise<PacienteBanco[]> {
+        console.log(nmPaciente)
+        const response: PacienteBanco[] = await knex.select('*').from('paciente').where({cd_multi_empresa: cdMultiEmpresa, ativo: 1}).andWhere('nm_paciente', 'ILIKE', `%${nmPaciente}%`);
+        console.log(response)
+        return response
     }
 
     async updatePaciente(cdPpaciente: number, cdMultiEmpresa: number, data: PacienteBanco): Promise<PacienteBanco> {

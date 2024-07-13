@@ -13,7 +13,8 @@ export interface PacienteRepository {
 
 export interface PacienteKnexRepository{
     getPacientes(cdMultiEmpresa: number, qt_resultados?: number, page?: number): Promise<PacienteBanco[]>
-    getPaciente(): Promise<PacienteBanco>
+    getPacienteById(): Promise<PacienteBanco>
+    getPacienteByName(nmPaciente: string, cdMultiEmpresa: number): Promise<PacienteBanco[]>
     countPacientes(cdMultiEmpresa: number): Promise<number>
     createPaciente(data: PacienteBanco): Promise<void>
     updatePaciente(cdPpaciente: number, cdMultiEmpresa: number, data: PacienteBanco): Promise<PacienteBanco>

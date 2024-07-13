@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { AgendamentoBanco } from "../../../../domain/models/agendamento/agendamento-models";
+import { AgendamentoBanco, ProcedimentoBanco, SalaBanco } from "../../../../domain/models/agendamento/agendamento-models";
 import { AgendamentoRepository } from "../../../../domain/repositories/agendamento/agendamento-repository";
 import { z } from "zod";
 import { agendamentoKnex } from "../../../database/knex/agendamento/agendamentoKnex";
@@ -11,17 +11,21 @@ const agendamentoSchema = z.object({
         hr_inicio: z.string(),
         dt_inicio: z.string(),
         hr_fim: z.string(),
-        dt_fim: z.string(),
         cd_paciente: z.number(),
         cd_atendimento: z.number().optional().nullable(),
-        cd_profissional: z.number(),
-        cd_procedimento: z.number()
+        cd_profissional: z.string(),
+        cd_procedimento: z.string().nullable().optional(),
+        cd_sala: z.string().nullable().optional(),
+        situacao: z.string().nullable().optional(),
+        lembrete_sms: z.string().nullable().optional(),
+        lembrete_whatsapp: z.string().nullable().optional(),
+        status: z.string().nullable().optional(),
     })
 })
 export class Agendamento implements AgendamentoRepository{
     async getAgendamentos(request: FastifyRequest, reply: FastifyReply): Promise<AgendamentoBanco[]> {
        const response = await agendamentoKnex.getAgendamentos()
-        console.log(response)
+        
         return reply.send(response).status(200)
     }
 
@@ -38,6 +42,7 @@ export class Agendamento implements AgendamentoRepository{
         console.log(responseAtendimento)
         data.cd_atendimento = responseAtendimento.messageServer.cd_atendimento
         const response = await agendamentoKnex.postAgendamento(data)
+        console.log(response)
         if(response.status === 201){
             const responseAgendamentos = await agendamentoKnex.getAgendamentos()
             return reply.status(201).send(responseAgendamentos)
@@ -52,4 +57,15 @@ export class Agendamento implements AgendamentoRepository{
         return
     }
 
+    async getProcedimentos(request: FastifyRequest, reply: FastifyReply): Promise<ProcedimentoBanco[]> {
+        const response = await agendamentoKnex.getProcedimentos()
+        return reply.send(response).status(200)
+        
+    }
+
+    async getSalas(request: FastifyRequest, reply: FastifyReply): Promise<SalaBanco[]> {
+        const response = await agendamentoKnex.getSalas()
+        return reply.send(response).status(200)
+        
+    }
 }    

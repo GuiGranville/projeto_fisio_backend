@@ -67,7 +67,10 @@ export class Paciente implements PacienteRepository{
     }
 
     async getPacienteByName(request: FastifyRequest, reply: FastifyReply): Promise<PacienteBanco> {
-        return
+        const { nm_paciente, cd_multi_empresa }: any = request.query
+        const response = await pacienteKnex.getPacienteByName(nm_paciente, cd_multi_empresa)
+
+        return reply.status(200).send(response)
     }
 
     async countPacientes(request: FastifyRequest, reply: FastifyReply): Promise<number> {
