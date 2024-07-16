@@ -7,6 +7,7 @@ import { healthCheckRoutes } from "./http/controllers/healthCheck/routes";
 import { pacienteRoutes } from "./http/controllers/paciente/routes";
 import { profissionalRoutes } from "./http/controllers/profissional/routes";
 import { agendamentoRoutes } from "./http/controllers/agendamento/routes";
+import { autenticacaoRoutes } from "./http/controllers/autenticacao/routes";
 
 export const server: FastifyInstance = fastify();
 
@@ -38,6 +39,8 @@ server.register(fastifySwaggerUi,{
     theme: {title: "Projeto Fisio"}
 })
 
+
+server.register(autenticacaoRoutes)
 server.register(healthCheckRoutes)
 server.register(pacienteRoutes)
 server.register(profissionalRoutes)
