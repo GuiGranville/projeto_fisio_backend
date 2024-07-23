@@ -36,6 +36,7 @@ export class Agendamento implements AgendamentoRepository{
             cd_profissional: data.cd_profissional,
             evolucao: '',
             cd_procedimento: data.cd_procedimento,
+            cd_convenio: 1,
             situacao: 'A'
         }
         const responseAtendimento = await atendimentoKnex.postAtendimento(atendimentoData)
