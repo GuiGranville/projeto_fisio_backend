@@ -15,7 +15,7 @@ const profissionalSchema = z.object({
         privilegio: z.string(),
         registro: z.string(),
         cd_tipo_profissional: z.number().optional().nullable(),
-        ativo: z.number().optional().nullable()
+        ativo: z.string().optional().nullable()
     })
 })
 
@@ -41,7 +41,7 @@ export class Profissional implements ProfissionalRepository {
         brcypt.hash(data.senha, 10, (err, hash) => {
             data.senha = hash
         })
-       data.ativo = 1
+       data.ativo = "1"
         try{
             const response = await profissionalKnex.postProfissional(data)
             console.log(response)

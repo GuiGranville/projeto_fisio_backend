@@ -14,11 +14,13 @@ class AgendamentoKnex implements AgendamentoKnexRepository{
             paciente.numero_telefone,
             profissional.cd_profissional,
             profissional.nm_profissional,
-            TO_TIMESTAMP(CONCAT(agenda.dt_inicio, ' ', agenda.hr_inicio), 'YYYY-MM-DD HH24:MI:SS') AS dt_inicio,
-            TO_TIMESTAMP(CONCAT(agenda.dt_inicio, ' ', agenda.hr_fim), 'YYYY-MM-DD HH24:MI:SS') AS dt_fim,
+            agenda.dt_inicio, 
+            agenda.hr_inicio,
+            agenda.hr_fim,
 			procedimento.nm_procedimento,
 			sala.nm_sala,
-			convenio.nm_convenio
+			convenio.nm_convenio,
+            agenda.status
             from it_agenda_central as agenda
             join paciente on paciente.cd_paciente = agenda.cd_paciente
             join profissional on profissional.cd_profissional = agenda.cd_profissional
