@@ -11,3 +11,4 @@ apps:
     pid_file: /home/guilh4301/applications/projeto/pid.pid
     interpreter: /usr/nodejs/node-v20.1.0/bin/node
     env: { NODE_ENV: development, PORT: '53951' }
+
