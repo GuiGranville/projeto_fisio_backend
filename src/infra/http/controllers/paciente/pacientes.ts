@@ -25,7 +25,7 @@ const pacienteSchema = z.object({
         profissao: z.string().nullable().optional(),
         empresa: z.string().nullable().optional(),
         telefone_fixo: z.string().nullable().optional(),
-        preferencia_contato: z.string(),
+        preferencia_contato: z.string().nullable().optional(),
         breve_diagnostico: z.string().nullable().optional(),
         nm_bairro: z.string().nullable().optional(),
         logradouro: z.string().nullable().optional(),
