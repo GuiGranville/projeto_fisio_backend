@@ -6,7 +6,7 @@ import knex from "../../database"
 class PacienteKnex implements PacienteKnexRepository{
 
     async getPacientes(cdMultiEmpresa: number, qt_resultados?: number, page?: number): Promise<PacienteBanco[]> {
-        const response = await knex.select('*').from('paciente').where({cd_multi_empresa: cdMultiEmpresa, ativo: 1}).limit(qt_resultados).offset((page - 1) * qt_resultados)
+        const response = await knex.select('*').from('paciente').where({ativo: 1}).limit(qt_resultados).offset((page - 1) * qt_resultados)
         return response
     }
 
