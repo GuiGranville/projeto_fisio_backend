@@ -69,4 +69,21 @@ export class Agendamento implements AgendamentoRepository{
         return reply.send(response).status(200)
         
     }
+
+    async atualizaStatus(request: FastifyRequest, reply: FastifyReply){
+        const { status, cd_it_agenda_central }: any = request.query
+        const response = await agendamentoKnex.putStatusAgendamento(status, cd_it_agenda_central)
+
+        if(response.status === 200){
+            
+            return reply.status(200).send({
+                message: 'Status alterado com sucesso'
+            })
+        }else{
+            return reply.status(500).send({
+                message: 'Erro ao alterar status do agendamento'
+            })
+        }
+
+    }
 }    

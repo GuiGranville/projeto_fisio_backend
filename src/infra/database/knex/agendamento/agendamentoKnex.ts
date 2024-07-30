@@ -69,7 +69,18 @@ class AgendamentoKnex implements AgendamentoKnexRepository{
             console.log(err)
             return {status: 500, messageClient: 'Erro ao buscar salas !', messageServer: err}
         }
-        return
+        
+    }
+
+    async putStatusAgendamento(status: string, cd_it_agenda_central: number): Promise<StatusReturn> {
+
+        try{
+            await knex('it_agenda_central').where({cd_it_agenda_central: cd_it_agenda_central}).update({status: status})
+            return {status: 200, messageClient: 'Status alterado com sucesso!'}
+        }catch(err){
+            console.log(err)
+            return {status: 500, messageClient: 'Erro ao alterar status do agendamento !', messageServer: err}
+        }
     }
 }
 

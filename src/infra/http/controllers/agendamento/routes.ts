@@ -9,4 +9,5 @@ export async function agendamentoRoutes(app: FastifyInstance) {
     app.put('/agendamento/update', agendamento.putAgendamento)
     app.get('/agendamento/procedimentos', agendamento.getProcedimentos)
     app.get('/agendamento/salas', agendamento.getSalas)
+    app.put('/agendamento/atualizaStatus', agendamento.atualizaStatus)
 }   
