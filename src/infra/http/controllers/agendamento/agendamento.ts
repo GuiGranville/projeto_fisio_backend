@@ -86,4 +86,14 @@ export class Agendamento implements AgendamentoRepository{
         }
 
     }
+
+    async deleteAgendamento(request: FastifyRequest, reply: FastifyReply) {
+        const { cd_it_agenda_central }: any = request.query
+        const response = await agendamentoKnex.deleteAgendamento(cd_it_agenda_central)
+        if(response.status === 200){
+            return reply.status(200).send({message: 'Agendamento excluído com sucesso'})
+        }else{
+            return reply.status(500).send({message: 'Erro ao excluir agendamento'})
+        }
+    }
 }    

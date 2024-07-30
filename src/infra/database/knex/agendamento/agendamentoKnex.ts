@@ -82,6 +82,17 @@ class AgendamentoKnex implements AgendamentoKnexRepository{
             return {status: 500, messageClient: 'Erro ao alterar status do agendamento !', messageServer: err}
         }
     }
+
+    async deleteAgendamento(cd_it_agenda_central: number): Promise<StatusReturn> {
+        try{
+            await knex('it_agenda_central').where({cd_it_agenda_central: cd_it_agenda_central}).del()
+            return {status: 200, messageClient: 'Agendamento deletado com sucesso!'}
+        }catch(err){
+            console.log(err)
+            return {status: 500, messageClient: 'Erro ao deletar agendamento !', messageServer: err}
+        }
+        
+    }
 }
 
 export const agendamentoKnex = new AgendamentoKnex()
