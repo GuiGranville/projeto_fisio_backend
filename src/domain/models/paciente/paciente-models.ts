@@ -13,5 +13,5 @@ export interface PacienteBanco{
     nm_estado?: string,
     nm_pais?: string,
     cd_multi_empresa?: number
-    ativo?: string
+    ativo?: number
 }

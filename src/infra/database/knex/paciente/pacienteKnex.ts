@@ -12,7 +12,7 @@ class PacienteKnex implements PacienteKnexRepository{
 
     async createPaciente(data: PacienteBanco): Promise<void> {
         console.log(data)
-        await knex('paciente').insert({data, ativo: 1})
+        await knex('paciente').insert(data)
        
     }
 
