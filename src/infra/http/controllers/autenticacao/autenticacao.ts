@@ -30,7 +30,7 @@ class AutenticacaoController{
                 {email: responseFuncionario.messageServer[0].email, name: responseFuncionario.messageServer[0].nm_profissional, permissions: ['admin']},
                  "secret", {expiresIn: "1d"})
             console.log(token)
-            return reply.status(200).send({message: 'Login Realizado com sucesso', token: token})
+            return reply.status(200).send({message: 'Login Realizado com sucesso', token: token, userInformation: responseFuncionario.messageServer[0]})
         }
         
         return reply.status(401).send({message: 'Sem login pra você amigo !'})

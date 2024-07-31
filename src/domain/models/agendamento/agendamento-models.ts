@@ -9,7 +9,10 @@ export interface AgendamentoBanco {
     cd_atendimento?: number
     cd_profissional?: string
     cd_procedimento?: string
+    numero_telefone?: string
+    procedimento?: string
     cd_sala?: string
+    nm_sala?: string
     lembrete_sms?: string
     lembrete_whatsapp?: string
     status?: string

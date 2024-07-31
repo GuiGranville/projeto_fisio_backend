@@ -25,7 +25,7 @@ const pacienteSchema = z.object({
         profissao: z.string().nullable().optional(),
         empresa: z.string().nullable().optional(),
         telefone_fixo: z.string().nullable().optional(),
-        preferencia_contato: z.string(),
+        preferencia_contato: z.string().nullable().optional(),
         breve_diagnostico: z.string().nullable().optional(),
         nm_bairro: z.string().nullable().optional(),
         logradouro: z.string().nullable().optional(),
@@ -35,6 +35,7 @@ const pacienteSchema = z.object({
         numero_convenio: z.string().nullable().optional(),
         validade_carteira: z.string().nullable().optional(),
         numero_cns: z.string().nullable().optional(),
+        ativo: z.number().nullable().optional()
     })
 })
 export class Paciente implements PacienteRepository{
@@ -48,6 +49,7 @@ export class Paciente implements PacienteRepository{
     async createPaciente(request: FastifyRequest, reply: FastifyReply): Promise<PacienteBanco> {
         console.log(request.body)
         const { data } = pacienteSchema.parse(request.body)
+        data.ativo = 1
         await pacienteKnex.createPaciente(data)
 
         const responsePacientes = await pacienteKnex.getPacientes(data.cd_multi_empresa)

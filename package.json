@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "build": "tsup src --minify --out-dir build"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.14.2",
     "dotenv": "^16.4.5",
+    "tsup": "^8.2.2",
     "tsx": "^4.14.0",
     "typescript": "^5.4.5"
   }

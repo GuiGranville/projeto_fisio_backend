@@ -1,0 +1,100 @@
+2024-07-25 20:46 -03:00: HTTP Server running on http://localhost:53951
+2024-07-25 20:47 -03:00: {
+2024-07-25 20:47 -03:00:   data: {
+2024-07-25 20:47 -03:00:     nm_profissional: 'Kiomara Manica Gaspodini',
+2024-07-25 20:47 -03:00:     email: 'kiomaramg@yahoo.com.br',
+2024-07-25 20:47 -03:00:     numero_telefone: '5498127-4780',
+2024-07-25 20:47 -03:00:     senha: 'gremio2021',
+2024-07-25 20:47 -03:00:     privilegio: 'A',
+2024-07-25 20:47 -03:00:     registro: '123456',
+2024-07-25 20:47 -03:00:     cd_tipo_profissional: 1
+2024-07-25 20:47 -03:00:   }
+2024-07-25 20:47 -03:00: }
+2024-07-25 20:47 -03:00: {
+2024-07-25 20:47 -03:00:   status: 500,
+2024-07-25 20:47 -03:00:   messageClient: 'Erro ao criar profissional !',
+2024-07-25 20:47 -03:00:   messageServer: error: insert into "profissional" ("ativo", "cd_tipo_profissional", "email", "nm_profissional", "numero_telefone", "privilegio", "registro", "senha") values ($1, $2, $3, $4, $5, $6, $7, $8) - value too long for type character varying(11)
+2024-07-25 20:47 -03:00:       at Parser.parseErrorMessage (/home/guilh4301/nodevenv/projeto/lib/node_modules/pg-protocol/dist/parser.js:283:98)
+2024-07-25 20:47 -03:00:       at Parser.handlePacket (/home/guilh4301/nodevenv/projeto/lib/node_modules/pg-protocol/dist/parser.js:122:29)
+2024-07-25 20:47 -03:00:       at Parser.parse (/home/guilh4301/nodevenv/projeto/lib/node_modules/pg-protocol/dist/parser.js:35:38)
+2024-07-25 20:47 -03:00:       at Socket.<anonymous> (/home/guilh4301/nodevenv/projeto/lib/node_modules/pg-protocol/dist/index.js:11:42)
+2024-07-25 20:47 -03:00:       at Socket.emit (node:events:511:28)
+2024-07-25 20:47 -03:00:       at addChunk (node:internal/streams/readable:332:12)
+2024-07-25 20:47 -03:00:       at readableAddChunk (node:internal/streams/readable:305:9)
+2024-07-25 20:47 -03:00:       at Readable.push (node:internal/streams/readable:242:10)
+2024-07-25 20:47 -03:00:       at TCP.onStreamRead (node:internal/stream_base_commons:190:23) {
+2024-07-25 20:47 -03:00:     length: 98,
+2024-07-25 20:47 -03:00:     severity: 'ERROR',
+2024-07-25 20:47 -03:00:     code: '22001',
+2024-07-25 20:47 -03:00:     detail: undefined,
+2024-07-25 20:47 -03:00:     hint: undefined,
+2024-07-25 20:47 -03:00:     position: undefined,
+2024-07-25 20:47 -03:00:     internalPosition: undefined,
+2024-07-25 20:47 -03:00:     internalQuery: undefined,
+2024-07-25 20:47 -03:00:     where: undefined,
+2024-07-25 20:47 -03:00:     schema: undefined,
+2024-07-25 20:47 -03:00:     table: undefined,
+2024-07-25 20:47 -03:00:     column: undefined,
+2024-07-25 20:47 -03:00:     dataType: undefined,
+2024-07-25 20:47 -03:00:     constraint: undefined,
+2024-07-25 20:47 -03:00:     file: 'varchar.c',
+2024-07-25 20:47 -03:00:     line: '624',
+2024-07-25 20:47 -03:00:     routine: 'varchar'
+2024-07-25 20:47 -03:00:   }
+2024-07-25 20:47 -03:00: }
+2024-07-25 20:48 -03:00: {
+2024-07-25 20:48 -03:00:   data: {
+2024-07-25 20:48 -03:00:     nm_profissional: 'Kiomara Manica Gaspodini',
+2024-07-25 20:48 -03:00:     email: 'kiomaramg@yahoo.com.br',
+2024-07-25 20:48 -03:00:     numero_telefone: '54981274780',
+2024-07-25 20:48 -03:00:     senha: 'gremio2021',
+2024-07-25 20:48 -03:00:     privilegio: 'A',
+2024-07-25 20:48 -03:00:     registro: '123456',
+2024-07-25 20:48 -03:00:     cd_tipo_profissional: 1
+2024-07-25 20:48 -03:00:   }
+2024-07-25 20:48 -03:00: }
+2024-07-25 20:48 -03:00: { status: 201, messageClient: 'Profissional criado com sucesso!' }
+2024-07-25 20:51 -03:00: kiomaramg@yahoo.com.br gremio123
+2024-07-25 20:51 -03:00: {
+2024-07-25 20:51 -03:00:   status: 200,
+2024-07-25 20:51 -03:00:   messageClient: 'Profissional encontrado',
+2024-07-25 20:51 -03:00:   messageServer: [
+2024-07-25 20:51 -03:00:     {
+2024-07-25 20:51 -03:00:       cd_profissional: 1,
+2024-07-25 20:51 -03:00:       nm_profissional: 'Kiomara Manica Gaspodini',
+2024-07-25 20:51 -03:00:       email: 'kiomaramg@yahoo.com.br',
+2024-07-25 20:51 -03:00:       numero_telefone: '54981274780',
+2024-07-25 20:51 -03:00:       senha: 'gremio2021',
+2024-07-25 20:51 -03:00:       privilegio: 'A',
+2024-07-25 20:51 -03:00:       registro: '123456',
+2024-07-25 20:51 -03:00:       cd_tipo_profissional: 1,
+2024-07-25 20:51 -03:00:       ativo: '1'
+2024-07-25 20:51 -03:00:     }
+2024-07-25 20:51 -03:00:   ]
+2024-07-25 20:51 -03:00: }
+2024-07-25 20:51 -03:00: gremio2021
+2024-07-25 20:51 -03:00: false
+2024-07-25 20:52 -03:00: {
+2024-07-25 20:52 -03:00:   data: {
+2024-07-25 20:52 -03:00:     nm_profissional: 'Kiomara Manica Gaspodini',
+2024-07-25 20:52 -03:00:     email: 'kiomaramg@yahoo.com.br',
+2024-07-25 20:52 -03:00:     numero_telefone: '54981274780',
+2024-07-25 20:52 -03:00:     senha: 'gremio2021',
+2024-07-25 20:52 -03:00:     privilegio: 'A',
+2024-07-25 20:52 -03:00:     registro: '123456',
+2024-07-25 20:52 -03:00:     cd_tipo_profissional: 1
+2024-07-25 20:52 -03:00:   }
+2024-07-25 20:52 -03:00: }
+2024-07-25 20:52 -03:00: { status: 201, messageClient: 'Profissional criado com sucesso!' }
+2024-07-25 20:53 -03:00: {
+2024-07-25 20:53 -03:00:   data: {
+2024-07-25 20:53 -03:00:     nm_profissional: 'Kiomara Manica Gaspodini',
+2024-07-25 20:53 -03:00:     email: 'kiomaramg@yahoo.com.br',
+2024-07-25 20:53 -03:00:     numero_telefone: '54981274780',
+2024-07-25 20:53 -03:00:     senha: 'gremio2021',
+2024-07-25 20:53 -03:00:     privilegio: 'A',
+2024-07-25 20:53 -03:00:     registro: '123456',
+2024-07-25 20:53 -03:00:     cd_tipo_profissional: 1
+2024-07-25 20:53 -03:00:   }
+2024-07-25 20:53 -03:00: }
+2024-07-25 20:53 -03:00: { status: 201, messageClient: 'Profissional criado com sucesso!' }

@@ -1,0 +1,19 @@
+{
+    "apps": {
+        "script": "/home/guilh4301/applications/projeto/index.js",
+        "name": "projeto",
+        "max_memory_restart": "128M",
+        "exec_mode": "fork",
+        "ignore_watch": "[\"[\\/\\]\\./\", \"node_modules\"]",
+        "watch": false,
+        "log_date_format": "YYYY-MM-DD HH:mm Z",
+        "out_file": "/home/guilh4301/applications/projeto/stdout.log",
+        "error_file": "/home/guilh4301/applications/projeto/stdout.log",
+        "pid_file": "/home/guilh4301/applications/projeto/pid.pid",
+        "interpreter": "/usr/nodejs/node-v20.1.0/bin/node",
+        "env": {
+            "NODE_ENV": "development",
+            "PORT": "53951"
+        }
+    }
+}

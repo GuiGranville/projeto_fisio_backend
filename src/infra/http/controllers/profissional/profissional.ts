@@ -3,7 +3,7 @@ import { ProfissionalRepository } from "../../../../domain/repositories/profissi
 import { ProfissionalBanco } from "../../../../domain/models/profissional/profissional-models";
 import { profissionalKnex } from "../../../database/knex/profissional/profissionalKnex";
 import { z } from "zod";
-import brcypt from "bcrypt"
+import bcrypt from "bcrypt"
 
 const profissionalSchema = z.object({
     data: z.object({
@@ -15,7 +15,7 @@ const profissionalSchema = z.object({
         privilegio: z.string(),
         registro: z.string(),
         cd_tipo_profissional: z.number().optional().nullable(),
-        ativo: z.number().optional().nullable()
+        ativo: z.string().optional().nullable()
     })
 })
 
@@ -36,26 +36,28 @@ export class Profissional implements ProfissionalRepository {
     }
 
     async postProfissional(request: FastifyRequest, reply: FastifyReply): Promise<ProfissionalBanco[]> {
-        console.log(request.body)
-        let { data } = profissionalSchema.parse(request.body)
-        brcypt.hash(data.senha, 10, (err, hash) => {
-            data.senha = hash
-        })
-       data.ativo = 1
-        try{
-            const response = await profissionalKnex.postProfissional(data)
-            console.log(response)
-            if(response.status === 201){
-                const responseProfissionais = await profissionalKnex.getProfissionais()
-                return reply.status(201).send(responseProfissionais)
+        console.log(request.body);
+        let { data } = profissionalSchema.parse(request.body);
+    
+        // Gerar o hash da senha de forma assíncrona
+        try {
+            data.senha = await bcrypt.hash(data.senha, 10);
+            data.ativo = "1";
+    
+            const response = await profissionalKnex.postProfissional(data);
+            console.log(response);
+    
+            if (response.status === 201) {
+                const responseProfissionais = await profissionalKnex.getProfissionais();
+                return reply.status(201).send(responseProfissionais);
             }
-            if(response.status === 500){
-                return reply.status(500).send(response)
-            }   
-        }catch(error){
-            return
+            if (response.status === 500) {
+                return reply.status(500).send(response);
+            }
+        } catch (error) {
+            console.error("Erro ao inserir profissional:", error);
+            return reply.status(500).send({ error: "Erro ao inserir profissional" });
         }
-        
     }
 
     async putProfissional(request: FastifyRequest, reply: FastifyReply): Promise<ProfissionalBanco[]> {

@@ -36,6 +36,7 @@ export class Agendamento implements AgendamentoRepository{
             cd_profissional: data.cd_profissional,
             evolucao: '',
             cd_procedimento: data.cd_procedimento,
+            cd_convenio: 2,
             situacao: 'A'
         }
         const responseAtendimento = await atendimentoKnex.postAtendimento(atendimentoData)
@@ -67,5 +68,32 @@ export class Agendamento implements AgendamentoRepository{
         const response = await agendamentoKnex.getSalas()
         return reply.send(response).status(200)
         
+    }
+
+    async atualizaStatus(request: FastifyRequest, reply: FastifyReply){
+        const { status, cd_it_agenda_central }: any = request.query
+        const response = await agendamentoKnex.putStatusAgendamento(status, cd_it_agenda_central)
+
+        if(response.status === 200){
+            
+            return reply.status(200).send({
+                message: 'Status alterado com sucesso'
+            })
+        }else{
+            return reply.status(500).send({
+                message: 'Erro ao alterar status do agendamento'
+            })
+        }
+
+    }
+
+    async deleteAgendamento(request: FastifyRequest, reply: FastifyReply) {
+        const { cd_it_agenda_central }: any = request.query
+        const response = await agendamentoKnex.deleteAgendamento(cd_it_agenda_central)
+        if(response.status === 200){
+            return reply.status(200).send({message: 'Agendamento excluído com sucesso'})
+        }else{
+            return reply.status(500).send({message: 'Erro ao excluir agendamento'})
+        }
     }
 }    

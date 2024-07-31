@@ -11,13 +11,23 @@ class AgendamentoKnex implements AgendamentoKnexRepository{
             agenda.cd_it_agenda_central,
             paciente.cd_paciente, 
             paciente.nm_paciente, 
+            paciente.numero_telefone,
             profissional.cd_profissional,
             profissional.nm_profissional,
-            TO_TIMESTAMP(CONCAT(agenda.dt_inicio, ' ', agenda.hr_inicio), 'YYYY-MM-DD HH24:MI:SS') AS dt_inicio,
-            TO_TIMESTAMP(CONCAT(agenda.dt_inicio, ' ', agenda.hr_fim), 'YYYY-MM-DD HH24:MI:SS') AS dt_fim
+            agenda.dt_inicio, 
+            agenda.hr_inicio,
+            agenda.hr_fim,
+			procedimento.nm_procedimento,
+			sala.nm_sala,
+			convenio.nm_convenio,
+            agenda.status
             from it_agenda_central as agenda
             join paciente on paciente.cd_paciente = agenda.cd_paciente
             join profissional on profissional.cd_profissional = agenda.cd_profissional
+			join procedimento on procedimento.cd_procedimento = agenda.cd_procedimento
+			join atendimento on atendimento.cd_atendimento = agenda.cd_atendimento
+			left join convenio on convenio.cd_convenio = atendimento.cd_convenio
+			left join sala on sala.cd_sala = agenda.cd_sala
             `)
             console.log(response.rows)
         return response.rows
@@ -59,7 +69,29 @@ class AgendamentoKnex implements AgendamentoKnexRepository{
             console.log(err)
             return {status: 500, messageClient: 'Erro ao buscar salas !', messageServer: err}
         }
-        return
+        
+    }
+
+    async putStatusAgendamento(status: string, cd_it_agenda_central: number): Promise<StatusReturn> {
+
+        try{
+            await knex('it_agenda_central').where({cd_it_agenda_central: cd_it_agenda_central}).update({status: status})
+            return {status: 200, messageClient: 'Status alterado com sucesso!'}
+        }catch(err){
+            console.log(err)
+            return {status: 500, messageClient: 'Erro ao alterar status do agendamento !', messageServer: err}
+        }
+    }
+
+    async deleteAgendamento(cd_it_agenda_central: number): Promise<StatusReturn> {
+        try{
+            await knex('it_agenda_central').where({cd_it_agenda_central: cd_it_agenda_central}).del()
+            return {status: 200, messageClient: 'Agendamento deletado com sucesso!'}
+        }catch(err){
+            console.log(err)
+            return {status: 500, messageClient: 'Erro ao deletar agendamento !', messageServer: err}
+        }
+        
     }
 }
 

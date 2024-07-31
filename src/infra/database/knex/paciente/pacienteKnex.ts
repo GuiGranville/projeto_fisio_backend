@@ -6,13 +6,13 @@ import knex from "../../database"
 class PacienteKnex implements PacienteKnexRepository{
 
     async getPacientes(cdMultiEmpresa: number, qt_resultados?: number, page?: number): Promise<PacienteBanco[]> {
-        const response = await knex.select('*').from('paciente').where({cd_multi_empresa: cdMultiEmpresa, ativo: 1}).limit(qt_resultados).offset((page - 1) * qt_resultados)
+        const response = await knex.select('*').from('paciente').where({ativo: 1}).limit(qt_resultados).offset((page - 1) * qt_resultados)
         return response
     }
 
     async createPaciente(data: PacienteBanco): Promise<void> {
         console.log(data)
-        await knex('paciente').insert({data, ativo: 1})
+        await knex('paciente').insert(data)
        
     }
 
@@ -32,7 +32,7 @@ class PacienteKnex implements PacienteKnexRepository{
 
     async getPacienteByName(nmPaciente: string, cdMultiEmpresa: number): Promise<PacienteBanco[]> {
         console.log(nmPaciente)
-        const response: PacienteBanco[] = await knex.select('*').from('paciente').where({cd_multi_empresa: cdMultiEmpresa, ativo: 1}).andWhere('nm_paciente', 'ILIKE', `%${nmPaciente}%`);
+        const response: PacienteBanco[] = await knex.select('*').from('paciente').where({ativo: 1}).andWhere('nm_paciente', 'ILIKE', `%${nmPaciente}%`);
         console.log(response)
         return response
     }
