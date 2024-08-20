@@ -13,7 +13,7 @@ export const server: FastifyInstance = fastify();
 
 
 server.register(cors, {
-    origin: true,
+    origin: "*",
 });
 
 server.register(fastifySwagger, {
