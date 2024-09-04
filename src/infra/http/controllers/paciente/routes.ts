@@ -12,4 +12,5 @@ export async function pacienteRoutes(app: FastifyInstance) {
     app.post("/paciente/create", {schema: pacienteCreateRouteSwaggerConfig}, paciente.createPaciente)
     app.delete("/paciente/delete", {schema: pacienteCreateRouteSwaggerConfig}, paciente.deletePaciente)
     app.put("/paciente/update", {schema: pacienteCreateRouteSwaggerConfig}, paciente.updatePaciente)
+    app.put("/paciente/evolucao", {schema: pacienteCreateRouteSwaggerConfig}, paciente.updateEvolucaoPaciente)
 }

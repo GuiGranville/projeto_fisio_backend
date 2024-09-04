@@ -5,6 +5,7 @@ import { ResolveFastifyRequestType } from "fastify/types/type-provider";
 import { IncomingMessage, ServerResponse } from "http";
 import { pacienteKnex } from "../../../database/knex/paciente/pacienteKnex";
 import { z } from "zod";
+import { StatusReturn } from "../../../../domain/repositories/statusReturn/statusReturn";
 
 
 const pacienteSchema = z.object({
@@ -108,4 +109,20 @@ export class Paciente implements PacienteRepository{
         }
     }
 
+    async updateEvolucaoPaciente(request: FastifyRequest, reply: FastifyReply): Promise<StatusReturn> {
+        try{
+            const {cd_paciente, cd_atendimento}: any = request.query
+            const { evolucao }: any = request.body
+
+            await pacienteKnex.updateEvolucaoPaciente(cd_paciente, cd_atendimento, evolucao)
+            return reply.status(200).send({status: 200, messageClient: "Evolução atualizada com sucesso!"} as StatusReturn)
+
+        }catch(error){
+            console.log(error)
+            return reply.status(500).send({
+                message: "Internal server error",
+                messageError: error})
+        }
+
+    }
 }

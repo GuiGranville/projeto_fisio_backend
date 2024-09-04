@@ -9,6 +9,7 @@ class AgendamentoKnex implements AgendamentoKnexRepository{
         const response = await knex.raw(`
             select 
             agenda.cd_it_agenda_central,
+            agenda.cd_atendimento,
             paciente.cd_paciente, 
             paciente.nm_paciente, 
             paciente.numero_telefone,

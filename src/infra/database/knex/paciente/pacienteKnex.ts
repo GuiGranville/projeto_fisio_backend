@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from "fastify"
 import { PacienteBanco } from "../../../../domain/models/paciente/paciente-models"
 import { PacienteKnexRepository } from "../../../../domain/repositories/paciente/paciente-repository"
 import knex from "../../database"
+import { StatusReturn } from "../../../../domain/repositories/statusReturn/statusReturn"
 
 class PacienteKnex implements PacienteKnexRepository{
 
@@ -42,6 +43,12 @@ class PacienteKnex implements PacienteKnexRepository{
         await knex('paciente').where({cd_paciente: cdPpaciente, cd_multi_empresa: cdMultiEmpresa}).update(data)
         
         return 
+    }
+
+    async updateEvolucaoPaciente(cdPaciente: number, cd_atendimento: number, evolucao: string): Promise<StatusReturn> {
+    
+        await knex('atendimento').where({cd_paciente: cdPaciente, cd_atendimento: cd_atendimento}).update({evolucao: evolucao})
+        return
     }
 }
 
